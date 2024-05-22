@@ -1,15 +1,17 @@
 import express, { Request, Response } from "express";
 const app = express();
 import cors from "cors";
+import { productRoutes } from "./modules/product.routes";
 
 // --------- parser -------------
 app.use(express.json()); // parse JSON data sent in req body
 app.use(cors()); // server allow all origin to access it's resources
 
 // -------- api middlewares ---------
+app.use("/api/products", productRoutes);
 
-app.post("/", (req: Request, res: Response) => {
-  console.log("passed data: ", req.body);
+// ---------- server entry api route ----------
+app.get("/", (req: Request, res: Response) => {
   res.send("Product management server is running!");
 });
 
