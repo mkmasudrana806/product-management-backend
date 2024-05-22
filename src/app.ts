@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 const app = express();
 import cors from "cors";
-import { productRoutes } from "./modules/product.routes";
+import { productRoutes } from "./modules/products/product.routes";
 
 // --------- parser -------------
 app.use(express.json()); // parse JSON data sent in req body

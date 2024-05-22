@@ -1,4 +1,4 @@
-// handle all student routes
+// handle all products
 import express from "express";
 import { productControllers } from "./product.controller";
 
