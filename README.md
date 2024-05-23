@@ -436,23 +436,64 @@ Make sure you have the following installed on your local machine:
   - `server.ts` - Contains server and database connection
  
 
-### Running in Development Mode
+## Deployment to Vercel
 
-1. Start the application in development mode using `ts-node`:
+To deploy this application to Vercel, follow these steps:
 
-    ```bash
-    npx ts-node src/index.ts
+1. **Ensure you have Vercel CLI installed**:
+    ```sh
+    npm install -g vercel
     ```
 
-    This will automatically compile and run the TypeScript files without needing to build them first.
+2. **Build your project**:
+    ```sh
+    npm run build
+    ```
 
-## License
+3. **Login to Vercel**:
+    ```sh
+    vercel login
+    ```
 
-This project is licensed under the ISC License. See the [LICENSE](LICENSE) file for more details.
+4. **Deploy your project**:
+    ```sh
+    vercel --prod
+    ```
+
+    Follow the prompts provided by Vercel to complete the deployment.
+
+5. **Re-Deployments**:
+    - Delete .vercel folder from your project
+    - then run fllowing
+   ```sh
+   vercel
+   ```
+
+### Vercel Configuration
+
+Ensure you have a `vercel.json` file in the root of your project with the following content:
+
+```json
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "dist/server.js",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "dist/server.js"
+        }
+    ]
+}
+```
 
 ## Author
 
-- Your Name
-- [Your Email](mailto:your-email@example.com)
-- [Your GitHub](https://github.com/yourusername)
+- Masud Rana
+- [Email](masud.rana11311@gmail.com)
+- [GitHub](https://github.com/mkmasudrana806)
 
