@@ -17,8 +17,8 @@ Make sure you have the following installed on your local machine:
 1. Clone the repository to your local machine:
 
     ```bash
-    git clone https://github.com/yourusername/product-management.git
-    cd product-management
+    git clone https://github.com/mkmasudrana806/product-management-backend.git
+    cd product-management-backend
     ```
 
 2. Install the dependencies:
