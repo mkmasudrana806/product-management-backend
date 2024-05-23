@@ -24,6 +24,7 @@ const ProductSchema = new Schema<IProduct, IProductModel>({
 
 // ------------ implementation of static methods ------------
 ProductSchema.statics.isProductQuantityAvailable = async function (id: string) {
+  // find product by id
   const product = await this.findById(id);
   if (!product) {
     return false;
@@ -42,6 +43,7 @@ ProductSchema.statics.isProductQuantityAvailable = async function (id: string) {
 
     return true;
   } else {
+    // update isStock field to false
     await this.findByIdAndUpdate(id, {
       $set: {
         "inventory.inStock": false,

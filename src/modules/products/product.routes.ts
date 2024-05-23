@@ -4,7 +4,7 @@ import { productControllers } from "./product.controller";
 
 const router = express.Router();
 
-// --------- api routes  ---------
+// --------- product api routes  ---------
 router.post("/", productControllers.createNewProduct);
 router.get("/", productControllers.getAllProducts); // also handle search query
 router.get("/:productId", productControllers.getSingleProduct);
