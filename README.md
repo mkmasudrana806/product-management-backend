@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a product management application that allows users to create orders and manage product inventory. It uses Node.js, Express, MongoDB, Mongoose, and TypeScript.
+This is a product management application that allows users to create product and orders and manage product inventory. It uses Node.js, Express, MongoDB, Mongoose, and TypeScript.
 
 ## Prerequisites
 
