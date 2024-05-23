@@ -423,13 +423,18 @@ Make sure you have the following installed on your local machine:
 ## Development
 
 ### Folder Structure
-
+- `dist/` - Contains output js files.
 - `src/` - Contains all the source files.
-  - `models/` - Contains the Mongoose schemas and models.
-  - `routes/` - Contains the Express routes.
-  - `controllers/` - Contains the controller logic for handling requests.
-  - `validation/` - Contains Zod validation schemas.
-  - `index.ts` - The main entry point of the application.
+  - `app/` - Contains the index.ts file for .evn configuration
+  - `modules/` - Contains all the .ts files
+      - `models/` - Contains the Mongoose schemas and models.
+      - `routes/` - Contains the Express routes.
+      - `controllers/` - Contains the controller logic for handling         requests.
+      - `validation/` - Contains Zod validation schemas.
+      - `index.ts` - The main entry point of the application.
+  - `app.ts` - Contains application entry routes, middleware, parser, cors policy
+  - `server.ts` - Contains server and database connection
+ 
 
 ### Running in Development Mode
 
