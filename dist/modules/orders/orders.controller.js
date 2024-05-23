@@ -23,7 +23,6 @@ const createNewOrder = (req, res) => __awaiter(void 0, void 0, void 0, function*
         const orderData = req.body;
         // check ordered product available or not
         const isAvailable = yield product_services_1.productServices.getSingleProductFromDB(orderData.productId);
-        console.log(isAvailable);
         if (!isAvailable) {
             res.status(500).json({
                 success: false,

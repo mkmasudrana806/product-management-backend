@@ -33,7 +33,7 @@ ProductSchema.statics.isProductQuantityAvailable = async function (id: string) {
     const newQuantity = product.inventory.quantity - 1;
     const inStock = newQuantity > 0;
 
-    // Update only the `quantity` and `inStock` fields in the `inventory` subdocument
+    // Update only quantity  fields in inventory field
     await this.findByIdAndUpdate(id, {
       $set: {
         "inventory.quantity": newQuantity,

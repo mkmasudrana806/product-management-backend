@@ -3,7 +3,7 @@ import app from "./app";
 import mongoose from "mongoose";
 import config from "./app/index";
 
-// database and server connection
+// ---------- database and server connection ------------
 let server: Server;
 main().catch((err) => console.log(err));
 

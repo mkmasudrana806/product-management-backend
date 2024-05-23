@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./app"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const index_1 = __importDefault(require("./app/index"));
-// database and server connection
+// ---------- database and server connection ------------
 let server;
 main().catch((err) => console.log(err));
 function main() {

@@ -15,7 +15,6 @@ const createNewOrder = async (req: Request, res: Response) => {
       orderData.productId
     );
 
-    console.log(isAvailable);
     if (!isAvailable) {
       res.status(500).json({
         success: false,

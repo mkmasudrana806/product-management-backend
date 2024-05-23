@@ -20,7 +20,7 @@ app.use("/api/orders", orders_routes_1.ordersRoutes);
 app.get("/", (req, res) => {
     res.send("Product management server is running!");
 });
-// random api route
+// -------- unknown api routes handler ------------
 app.use("*", (req, res) => {
     res.status(404).json({
         success: false,

@@ -61,7 +61,7 @@ ProductSchema.statics.isProductQuantityAvailable = function (id) {
         if (product.inventory.quantity > 0) {
             const newQuantity = product.inventory.quantity - 1;
             const inStock = newQuantity > 0;
-            // Update only the `quantity` and `inStock` fields in the `inventory` subdocument
+            // Update only quantity  fields in inventory field
             yield this.findByIdAndUpdate(id, {
                 $set: {
                     "inventory.quantity": newQuantity,
