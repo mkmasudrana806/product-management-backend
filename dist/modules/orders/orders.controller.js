@@ -15,19 +15,39 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ordersController = void 0;
 const orders_services_1 = require("./orders.services");
 const orders_validation_zod_1 = __importDefault(require("./orders.validation.zod"));
+const product_model_1 = __importDefault(require("../products/product.model"));
+const product_services_1 = require("../products/product.services");
 // ---------- create a new order -------------
 const createNewOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const orderData = req.body;
-        // zod validation schema
-        const zodParseData = orders_validation_zod_1.default.parse(orderData);
-        // save data to database
-        const result = yield orders_services_1.ordersServices.createOrderIntoDB(zodParseData);
-        res.status(200).json({
-            success: true,
-            message: "Order created successfully!",
-            data: result,
-        });
+        // check ordered product available or not
+        const isAvailable = yield product_services_1.productServices.getSingleProductFromDB(orderData.productId);
+        console.log(isAvailable);
+        if (!isAvailable) {
+            res.status(500).json({
+                success: false,
+                message: "Order not found",
+            });
+        }
+        // if order product inventory isStock, then update quantity and create order
+        else if (yield product_model_1.default.isProductQuantityAvailable(orderData.productId)) {
+            // zod validation schema
+            const zodParseData = orders_validation_zod_1.default.parse(orderData);
+            // save data to database
+            const result = yield orders_services_1.ordersServices.createOrderIntoDB(zodParseData);
+            res.status(200).json({
+                success: true,
+                message: "Order created successfully!",
+                data: result,
+            });
+        }
+        else {
+            res.status(500).json({
+                success: false,
+                message: "Insufficient quantity available in inventory",
+            });
+        }
     }
     catch (error) {
         res.status(500).json({

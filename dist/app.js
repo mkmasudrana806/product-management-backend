@@ -20,4 +20,11 @@ app.use("/api/orders", orders_routes_1.ordersRoutes);
 app.get("/", (req, res) => {
     res.send("Product management server is running!");
 });
+// random api route
+app.use("*", (req, res) => {
+    res.status(404).json({
+        success: false,
+        message: "Route not found",
+    });
+});
 exports.default = app;

@@ -1,5 +1,5 @@
 //  ----------- internal and external import  -----------
-import mongoose, { Schema, model } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { IOrders } from "./orders.interface";
 
 // ----------- orders schema -----------

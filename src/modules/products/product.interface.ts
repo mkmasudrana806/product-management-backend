@@ -1,3 +1,5 @@
+import { Model } from "mongoose";
+
 export interface IVariant {
   type: string;
   value: string;
@@ -8,7 +10,7 @@ export interface IInventory {
   inStock: boolean;
 }
 
-// product interface
+// ---------  product interface ---------
 export interface IProduct {
   name: string;
   description: string;
@@ -17,4 +19,9 @@ export interface IProduct {
   tags: string[];
   variants: IVariant[];
   inventory: IInventory;
+}
+
+// ------------- product static model ------------
+export interface IProductModel extends Model<IProduct> {
+  isProductQuantityAvailable(id: string): Promise<IProduct | null>;
 }

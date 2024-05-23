@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document } from "mongoose";
-import { IProduct } from "./product.interface";
+import { IProduct, IProductModel } from "./product.interface";
 
 const VariantSchema: Schema = new Schema({
   type: { type: String, required: true },
@@ -11,8 +11,8 @@ const InventorySchema: Schema = new Schema({
   inStock: { type: Boolean, required: true },
 });
 
-// product schema
-const ProductSchema: Schema = new Schema({
+//  --------- product schema ---------
+const ProductSchema = new Schema<IProduct, IProductModel>({
   name: { type: String, required: true },
   description: { type: String, required: true },
   price: { type: Number, required: true },
@@ -22,6 +22,39 @@ const ProductSchema: Schema = new Schema({
   inventory: { type: InventorySchema, required: true },
 });
 
-const Product = mongoose.model<IProduct>("Product", ProductSchema);
+// ------------ implementation of static methods ------------
+ProductSchema.statics.isProductQuantityAvailable = async function (id: string) {
+  const product = await this.findById(id);
+  if (!product) {
+    return false;
+  }
+
+  if (product.inventory.quantity > 0) {
+    const newQuantity = product.inventory.quantity - 1;
+    const inStock = newQuantity > 0;
+
+    // Update only the `quantity` and `inStock` fields in the `inventory` subdocument
+    await this.findByIdAndUpdate(id, {
+      $set: {
+        "inventory.quantity": newQuantity,
+      },
+    });
+
+    return true;
+  } else {
+    await this.findByIdAndUpdate(id, {
+      $set: {
+        "inventory.inStock": false,
+      },
+    });
+    return false;
+  }
+};
+
+// ---------- product model -----------
+const Product = mongoose.model<IProduct, IProductModel>(
+  "Product",
+  ProductSchema
+);
 
 export default Product;

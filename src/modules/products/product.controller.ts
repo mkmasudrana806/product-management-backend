@@ -1,8 +1,9 @@
+//  --------- internal and external import  ---------
 import { Request, Response } from "express";
 import { productServices } from "./product.services";
 import ProductValidationSchema from "./product.validation.zod";
 
-// create a new product
+// --------- create a new product ---------
 const createNewProduct = async (req: Request, res: Response) => {
   try {
     const productData = req.body;
@@ -24,7 +25,7 @@ const createNewProduct = async (req: Request, res: Response) => {
   }
 };
 
-// get all products or search products
+// ---------  get all products or search products ---------
 const getAllProducts = async (req: Request, res: Response) => {
   try {
     // extract search query
@@ -58,7 +59,7 @@ const getAllProducts = async (req: Request, res: Response) => {
   }
 };
 
-// get a single product by id
+//  --------- get a single product by id ---------
 const getSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
@@ -77,7 +78,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
   }
 };
 
-// update a product
+//  --------- update a product ---------
 const updateAProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
@@ -100,7 +101,7 @@ const updateAProduct = async (req: Request, res: Response) => {
   }
 };
 
-// get a single product
+//  --------- get a single product ---------
 const deleteAProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
@@ -119,7 +120,7 @@ const deleteAProduct = async (req: Request, res: Response) => {
   }
 };
 
-// export all controllers
+//  --------- export all controllers ---------
 export const productControllers = {
   createNewProduct,
   getAllProducts,

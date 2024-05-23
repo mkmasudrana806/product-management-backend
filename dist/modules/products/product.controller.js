@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.productControllers = void 0;
 const product_services_1 = require("./product.services");
 const product_validation_zod_1 = __importDefault(require("./product.validation.zod"));
-// create a new product
+// --------- create a new product ---------
 const createNewProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const productData = req.body;
@@ -37,7 +37,7 @@ const createNewProduct = (req, res) => __awaiter(void 0, void 0, void 0, functio
         });
     }
 });
-// get all products or search products
+// ---------  get all products or search products ---------
 const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // extract search query
@@ -70,7 +70,7 @@ const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
     }
 });
-// get a single product by id
+//  --------- get a single product by id ---------
 const getSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { productId } = req.params;
@@ -89,7 +89,7 @@ const getSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, functio
         });
     }
 });
-// update a product
+//  --------- update a product ---------
 const updateAProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { productId } = req.params;
@@ -109,7 +109,7 @@ const updateAProduct = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
     }
 });
-// get a single product
+//  --------- get a single product ---------
 const deleteAProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { productId } = req.params;
@@ -128,7 +128,7 @@ const deleteAProduct = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
     }
 });
-// export all controllers
+//  --------- export all controllers ---------
 exports.productControllers = {
     createNewProduct,
     getAllProducts,

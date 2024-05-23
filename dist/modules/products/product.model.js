@@ -22,6 +22,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const VariantSchema = new mongoose_1.Schema({
@@ -32,7 +41,7 @@ const InventorySchema = new mongoose_1.Schema({
     quantity: { type: Number, required: true },
     inStock: { type: Boolean, required: true },
 });
-// product schema
+//  --------- product schema ---------
 const ProductSchema = new mongoose_1.Schema({
     name: { type: String, required: true },
     description: { type: String, required: true },
@@ -42,5 +51,34 @@ const ProductSchema = new mongoose_1.Schema({
     variants: { type: [VariantSchema], required: true },
     inventory: { type: InventorySchema, required: true },
 });
+// ------------ implementation of static methods ------------
+ProductSchema.statics.isProductQuantityAvailable = function (id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const product = yield this.findById(id);
+        if (!product) {
+            return false;
+        }
+        if (product.inventory.quantity > 0) {
+            const newQuantity = product.inventory.quantity - 1;
+            const inStock = newQuantity > 0;
+            // Update only the `quantity` and `inStock` fields in the `inventory` subdocument
+            yield this.findByIdAndUpdate(id, {
+                $set: {
+                    "inventory.quantity": newQuantity,
+                },
+            });
+            return true;
+        }
+        else {
+            yield this.findByIdAndUpdate(id, {
+                $set: {
+                    "inventory.inStock": false,
+                },
+            });
+            return false;
+        }
+    });
+};
+// ---------- product model -----------
 const Product = mongoose_1.default.model("Product", ProductSchema);
 exports.default = Product;

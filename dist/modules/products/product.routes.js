@@ -4,11 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.productRoutes = void 0;
-// handle all products
+//  --------- all internal and external import  ---------
 const express_1 = __importDefault(require("express"));
 const product_controller_1 = require("./product.controller");
 const router = express_1.default.Router();
-// routes
+// --------- api routes  ---------
 router.post("/", product_controller_1.productControllers.createNewProduct);
 router.get("/", product_controller_1.productControllers.getAllProducts); // also handle search query
 router.get("/:productId", product_controller_1.productControllers.getSingleProduct);

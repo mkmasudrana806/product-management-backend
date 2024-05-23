@@ -11,13 +11,15 @@ const InventorySchema = z.object({
       required_error: "Quantity is required",
       invalid_type_error: "Quantity must be a number",
     })
-    .int("Quantity must be an integer"),
+    .int("Quantity must be an integer")
+    .nonnegative("quantity must be non negative value"),
   inStock: z.boolean({
     required_error: "In-stock status is required",
     invalid_type_error: "In-stock status must be a boolean",
   }),
 });
 
+//  --------- product validation schema  ---------
 const ProductValidationSchema = z.object({
   name: z.string().trim().min(1, "Product name is required"),
   description: z.string().trim().min(1, "Product description is required"),

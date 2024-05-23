@@ -1,10 +1,10 @@
-// handle all products
+//  --------- all internal and external import  ---------
 import express from "express";
 import { productControllers } from "./product.controller";
 
 const router = express.Router();
 
-// routes
+// --------- api routes  ---------
 router.post("/", productControllers.createNewProduct);
 router.get("/", productControllers.getAllProducts); // also handle search query
 router.get("/:productId", productControllers.getSingleProduct);
